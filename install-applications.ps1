@@ -7,32 +7,33 @@ function Install-MicrosoftStore-Applications {
         # Bitwarden
         # winget install --id 9PJSDV0VPK04 --accept-package-agreements # MSI版: Bitwarden.Bitwarden
         # VS Code
-        winget install --id XP9KHM4BK9FZ7Q --accept-package-agreements # MSI版: Microsoft.VisualStudioCode
-        # VS Codeのレジストリ設定
-        #? Memo: -Forceオプションは既にある場合にエラーにならないようにするため
-        #? {0}は文字列フォーマットの記法
-        # %1 は選択した1つのファイルにおきかえられ、%V は複数ファイルやフォルダを選択した場合にも機能する
-        # -LiteralPathは"*"を通常文字として手扱うため
-        $vscodePath = Join-Path $env:LOCALAPPDATA "Programs\Microsoft VS Code\Code.exe"
-        New-Item -Path "HKCU:\Software\Classes\Directory\shell\VSCode\command" -Force | Out-Null
-        # フォルダ選択時のコンテキストメニューに追加
-        Set-ItemProperty -Path "HKCU:\Software\Classes\Directory\shell\VSCode\command" -Name "(default)" -Value ('"{0}" "%V"' -f $vscodePath)
-        Set-ItemProperty -Path "HKCU:\Software\Classes\Directory\shell\VSCode" -Name "(default)" -Value "Code で開く"
-        Set-ItemProperty -Path "HKCU:\Software\Classes\Directory\shell\VSCode" -Name "Icon" -Value $vscodePath
-        # ファイル選択時のコンテキストメニューに追加
-        New-Item -Path "HKCU:\Software\Classes\*\shell\VSCode\command" -Force | Out-Null
-        Set-ItemProperty -LiteralPath "HKCU:\Software\Classes\*\shell\VSCode\command" -Name "(default)" -Value ('"{0}" "%1"' -f $vscodePath)
-        Set-ItemProperty -LiteralPath "HKCU:\Software\Classes\*\shell\VSCode" -Name "(default)" -Value "Code で開く"
-        Set-ItemProperty -LiteralPath "HKCU:\Software\Classes\*\shell\VSCode" -Name "Icon" -Value $vscodePath
-        # フォルダ選択時のコンテキストメニューに追加
-        New-Item -Path "HKCU:\Software\Classes\Directory\Background\shell\VSCode\command" -Force | Out-Null
-        Set-ItemProperty -Path "HKCU:\Software\Classes\Directory\Background\shell\VSCode\command" -Name "(default)" -Value ('"{0}" "%V"' -f $vscodePath)
-        Set-ItemProperty -Path "HKCU:\Software\Classes\Directory\Background\shell\VSCode" -Name "(default)" -Value "Code で開く"
-        Set-ItemProperty -Path "HKCU:\Software\Classes\Directory\Background\shell\VSCode" -Name "Icon" -Value $vscodePath
-        
+        # winget install --id XP9KHM4BK9FZ7Q --accept-package-agreements # MSI版: Microsoft.VisualStudioCode
+        # # VS Codeのレジストリ設定
+        # #? Memo: -Forceオプションは既にある場合にエラーにならないようにするため
+        # #? {0}は文字列フォーマットの記法
+        # # %1 は選択した1つのファイルにおきかえられ、%V は複数ファイルやフォルダを選択した場合にも機能する
+        # # -LiteralPathは"*"を通常文字として手扱うため
+        # $vscodePath = Join-Path $env:LOCALAPPDATA "Programs\Microsoft VS Code\Code.exe"
+        # New-Item -Path "HKCU:\Software\Classes\Directory\shell\VSCode\command" -Force | Out-Null
+        # # フォルダ選択時のコンテキストメニューに追加
+        # Set-ItemProperty -Path "HKCU:\Software\Classes\Directory\shell\VSCode\command" -Name "(default)" -Value ('"{0}" "%V"' -f $vscodePath)
+        # Set-ItemProperty -Path "HKCU:\Software\Classes\Directory\shell\VSCode" -Name "(default)" -Value "Code で開く"
+        # Set-ItemProperty -Path "HKCU:\Software\Classes\Directory\shell\VSCode" -Name "Icon" -Value $vscodePath
+        # # ファイル選択時のコンテキストメニューに追加
+        # New-Item -Path "HKCU:\Software\Classes\*\shell\VSCode\command" -Force | Out-Null
+        # Set-ItemProperty -LiteralPath "HKCU:\Software\Classes\*\shell\VSCode\command" -Name "(default)" -Value ('"{0}" "%1"' -f $vscodePath)
+        # Set-ItemProperty -LiteralPath "HKCU:\Software\Classes\*\shell\VSCode" -Name "(default)" -Value "Code で開く"
+        # Set-ItemProperty -LiteralPath "HKCU:\Software\Classes\*\shell\VSCode" -Name "Icon" -Value $vscodePath
+        # # フォルダ選択時のコンテキストメニューに追加
+        # New-Item -Path "HKCU:\Software\Classes\Directory\Background\shell\VSCode\command" -Force | Out-Null
+        # Set-ItemProperty -Path "HKCU:\Software\Classes\Directory\Background\shell\VSCode\command" -Name "(default)" -Value ('"{0}" "%V"' -f $vscodePath)
+        # Set-ItemProperty -Path "HKCU:\Software\Classes\Directory\Background\shell\VSCode" -Name "(default)" -Value "Code で開く"
+        # Set-ItemProperty -Path "HKCU:\Software\Classes\Directory\Background\shell\VSCode" -Name "Icon" -Value $vscodePath
+        # AutoHotkey v2
+        winget install --id 9PLQFDG8HH9D --accept-package-agreements # MSI版: AutoHotkey.AutoHotkey
         
         # Slack
-        # winget install --id 9WZDNCRDK3WP --accept-package-agreements #MSI版: SlackTechnologies.Slack
+        # winget install --id 9PLQFDG8HH9D --accept-package-agreements #MSI版: SlackTechnologies.Slack
         Write-Host "Microsoft Storeアプリケーションのインストールが完了しました。" -ForegroundColor Green
     }
     catch {
